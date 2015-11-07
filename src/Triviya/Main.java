@@ -22,6 +22,7 @@ public class Main {
         Scanner s=new Scanner(System.in);
         boolean sel=true;
         String op= "";
+        String opt="";
         while (sel){
             System.out.println("Please select an operator (admin or user):");
             op = s.nextLine();
@@ -33,7 +34,6 @@ public class Main {
         if (op.equals("admin"))
             u=new Admin();
         else u=new User();
-        
         
     }
     
