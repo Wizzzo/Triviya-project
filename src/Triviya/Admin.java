@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Triviya;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 /**
  *
@@ -33,7 +37,23 @@ public class Admin extends User{
         }
     }
     
-    public void addQuestion(){
+    public void addQuestion(Question q,int type) throws FileNotFoundException, IOException{
+        
+        Question qst=q;
+        if (type == 0){
+        FileOutputStream qstFile = new FileOutputStream("questions0");
+        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
+        
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    public void createQuestion(){
         int type;
         Scanner s = new Scanner(System.in);
         boolean sel = true;
