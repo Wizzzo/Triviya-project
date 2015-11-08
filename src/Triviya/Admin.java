@@ -17,13 +17,19 @@ public class Admin extends User{
         boolean sel=true;
         String opt="";
         while (sel){
-            System.out.println("What would you like to do? (add, exit, *)");
+            System.out.println("What would you like to do? (add, exit, change(change user), *)");
             opt=s.nextLine();
-            if (opt.equals("add"))
+            if (opt.equals("add")){
+                System.out.println("add");
                 addQuestion();
-            else if (opt.equals("exit"))
+            }else if (opt.equals("exit")){
+                    System.out.println("exit");
+                System.exit(0);
+            }else if (opt.equals("change") || opt.equals("change user")){
+                System.out.println("cahnge");
                 sel=false;
-            else System.out.println("Only the following options are available");
+                System.out.println(sel);
+            }else System.out.println("Only the following options are available");
         }
     }
     

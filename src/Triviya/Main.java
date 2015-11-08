@@ -20,21 +20,24 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Wellcome to the Trivia Consol application");
         Scanner s=new Scanner(System.in);
-        boolean sel=true;
         String op= "";
         String opt="";
-        while (sel){
-            System.out.println("Please select an operator (admin or user):");
-            op = s.nextLine();
-            op=op.toLowerCase();
-            if (op.equals("admin") || op.equals("user"))
-                sel=false;
+        while (true){
+            while (true){
+                System.out.println("Please select an operator (admin or user, exit to quit):");
+                op = s.nextLine();
+                op=op.toLowerCase();
+                if (op.equals("admin") || op.equals("user") || op.equals("exit"))
+                    break;
+                else System.out.println("You have to choose one of the following");
+            }
+            User u;
+            if (op.equals("admin"))
+                u=new Admin();
+            else if (op.equals("user"))
+                u= new User();
+            else if (op.equals("exit"))
+                System.exit(0);
         }
-        User u;
-        if (op.equals("admin"))
-            u=new Admin();
-        else u=new User();
-        
     }
-    
 }

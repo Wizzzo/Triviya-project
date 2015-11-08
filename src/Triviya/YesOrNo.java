@@ -11,4 +11,7 @@ package Triviya;
  */
 public class YesOrNo extends MultipleOptions {
     
+    public YesOrNo(){
+        
+    }
 }
