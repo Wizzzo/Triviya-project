@@ -15,6 +15,7 @@ public abstract class Question {
     int dif; // 0 for easy 1 for med 2 for hard
     String sub; // question's subject
     Scanner s =new Scanner(System.in);
+    int questionType;
     
     public Question(){
         boolean sel = true;
@@ -52,5 +53,10 @@ public abstract class Question {
   //      System.out.println("please choose the question difficulty (0 for easy 1 for medium 2 for hard)");
     //    type = s.nextInt();
     }
+    
+    public int getType(){ return questionType; }
+    
+    public int getDif() { return dif;}
+    
 }
 

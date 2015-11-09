@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package Triviya;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
+import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author oriwi_000
@@ -25,7 +25,7 @@ public class Admin extends User{
             opt=s.nextLine();
             if (opt.equals("add")){
                 System.out.println("add");
-                addQuestion();
+                createQuestion();
             }else if (opt.equals("exit")){
                     System.out.println("exit");
                 System.exit(0);
@@ -37,13 +37,30 @@ public class Admin extends User{
         }
     }
     
-    public void addQuestion(Question q,int type) throws FileNotFoundException, IOException{
+    public void addQuestion(Question q) {
         
         Question qst=q;
-        if (type == 0){
-        FileOutputStream qstFile = new FileOutputStream("questions0");
+        if (q.getDif() == 0){
+        FileOutputStream qstFile;
+            try {
+                qstFile = new FileOutputStream("questions0");
+            } catch (FileNotFoundException ex) {
+                System.out.println("File not found");
+            }
         ObjectOutputStream dst = new ObjectOutputStream(qstFile);
-        
+        dst.writeObject(q);
+        }
+          
+        if (q.getDif() == 1){
+        FileOutputStream qstFile = new FileOutputStream("questions1");
+        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
+        dst.writeObject(q);
+        }
+         
+        if (q.getDif() == 2){
+        FileOutputStream qstFile = new FileOutputStream("questions2");
+        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
+        dst.writeObject(q);
         }
         
         
@@ -53,29 +70,30 @@ public class Admin extends User{
     
     
     
-    public void createQuestion(){
+    public void createQuestion() throws IOException{
         int type;
         Scanner s = new Scanner(System.in);
-        boolean sel = true;
+        
         String st;
         Question q;
-        while (sel){
+        while (true){
             System.out.println("Please choose what kind of question is it (0 - yes of no ,1 - multiple options, 2 - open qeustion)");
             type = s.nextInt();
             if (type==0){
                 q=new MultipleOptions();
-                sel=false;
+                return;
             }
             else if (type==1){
                 q=new YesOrNo();
-                sel=false;
+                return;
             }else if (type==2){
                 q=new OpenQuestion();
-                sel=false;
+               return;
             }else
                 System.out.println("you have to choose one of the followed options");
         }
     
-
+        addQuestion(q);
+            
     }
 }
