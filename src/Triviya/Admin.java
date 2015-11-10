@@ -7,8 +7,6 @@ package Triviya;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author oriwi_000
@@ -16,7 +14,7 @@ import java.util.logging.Logger;
 public class Admin extends User{
     
     
-    public Admin(){
+    public Admin() throws IOException{
         Scanner s =new Scanner(System.in);
         boolean sel=true;
         String opt="";
@@ -39,31 +37,48 @@ public class Admin extends User{
     
     public void addQuestion(Question q) {
         
-        Question qst=q;
+        Question qst=q;    
         if (q.getDif() == 0){
-        FileOutputStream qstFile;
-            try {
-                qstFile = new FileOutputStream("questions0");
-            } catch (FileNotFoundException ex) {
-                System.out.println("File not found");
-            }
-        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
-        dst.writeObject(q);
+            try{
+                   
+                ObjectOutputStream dst = new ObjectOutputStream(new FileOutputStream("questions0"));
+
+                 dst.writeObject(q);
+                 dst.flush();
+                 dst.close();
+                }
+                catch(IOException ex){
+                System.out.println("file not found");
+                }
         }
           
-        if (q.getDif() == 1){
-        FileOutputStream qstFile = new FileOutputStream("questions1");
-        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
-        dst.writeObject(q);
+      if (q.getDif() == 1){
+            try{
+                   
+                ObjectOutputStream dst = new ObjectOutputStream(new FileOutputStream("questions1"));
+
+                 dst.writeObject(q);
+                 dst.flush();
+                 dst.close();
+                }
+                catch(IOException ex){
+                System.out.println("file not found");
+                }
         }
-         
-        if (q.getDif() == 2){
-        FileOutputStream qstFile = new FileOutputStream("questions2");
-        ObjectOutputStream dst = new ObjectOutputStream(qstFile);
-        dst.writeObject(q);
+      
+      if (q.getDif() == 2){
+            try{
+                   
+                ObjectOutputStream dst = new ObjectOutputStream(new FileOutputStream("questions2"));
+
+                 dst.writeObject(q);
+                 dst.flush();
+                 dst.close();
+                }
+                catch(IOException ex){
+                System.out.println("file not found");
+                }
         }
-        
-        
     }
     
     
@@ -77,23 +92,26 @@ public class Admin extends User{
         String st;
         Question q;
         while (true){
-            System.out.println("Please choose what kind of question is it (0 - yes of no ,1 - multiple options, 2 - open qeustion)");
+            System.out.println("Please choose what kind of question it is (0 - yes or no ,1 - multiple options, 2 - open qeustion)");
             type = s.nextInt();
             if (type==0){
                 q=new MultipleOptions();
+                addQuestion(q);
                 return;
             }
             else if (type==1){
                 q=new YesOrNo();
+                addQuestion(q);
                 return;
             }else if (type==2){
                 q=new OpenQuestion();
+                addQuestion(q);
                return;
             }else
                 System.out.println("you have to choose one of the followed options");
         }
     
-        addQuestion(q);
+        
             
     }
 }
